@@ -10,13 +10,13 @@
 # graded separately). But as long as you collaborate -- even a little bit -- 
 # please put your collaborator's netids here so that we can track groups.
 # ====================================
-authors = ['netID1','netID2']
+authors = ['drs374','aa2638', 'mlp267']
 
 # ==========Python Version============
 # Which version of python are you using? 
 # "Python 2" or "Python 3"? (Autograder defaults to 3) 
 # ====================================
-python_version = "YourPythonVersionHere"
+python_version = "3.12"
 
 
 # ======Submission and Packages=======
@@ -44,8 +44,7 @@ import matplotlib.pyplot as plt
 class UndirectedGraph:
     def __init__(self,number_of_nodes):
         '''Assume that nodes are represented by indices/integers between 0 and number_of_nodes - 1.'''
-        # TODO: Implement this method
-        pass
+        self.number_of_nodes = number_of_nodes
     
     def add_edge(self, nodeA, nodeB):
         ''' Adds an undirected edge to the graph, between nodeA and nodeB. Order of arguments should not matter'''
@@ -60,6 +59,9 @@ class UndirectedGraph:
     
     def check_edge(self, nodeA, nodeB):
         ''' This method should return true is there is an edge between nodeA and nodeB, and false otherwise'''
+
+        
+        
         # TODO: Implement this method
         pass
     
