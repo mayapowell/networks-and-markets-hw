@@ -10,7 +10,7 @@
 # graded separately). But as long as you collaborate -- even a little bit -- 
 # please put your collaborator's netids here so that we can track groups.
 # ====================================
-authors = ['drs374','aa2638', 'mlp267']
+authors = ['drs374', 'mlp267']
 
 # ==========Python Version============
 # Which version of python are you using? 
@@ -45,16 +45,23 @@ class UndirectedGraph:
     def __init__(self,number_of_nodes):
         '''Assume that nodes are represented by indices/integers between 0 and number_of_nodes - 1.'''
         self.number_of_nodes = number_of_nodes
+        self.edges = []
     
     def add_edge(self, nodeA, nodeB):
         ''' Adds an undirected edge to the graph, between nodeA and nodeB. Order of arguments should not matter'''
-        # TODO: Implement this method
-        pass
+        for i in self.edges: 
+          if i[0]== nodeA or i[0] == nodeB
+            if i[1] == nodeA or i[1] == nodeB
+                pass
+                else self.edges.append([nodeA,nodeB])
+            else self.edges.append([nodeA,nodeB])
+      
+       
     
     def edges_from(self, nodeA):
         ''' This method shold return a list of all the nodes nodeB such that nodeA and nodeB are 
         connected by an edge'''
-        # TODO: Implement this method
+        
         pass
     
     def check_edge(self, nodeA, nodeB):
@@ -67,8 +74,8 @@ class UndirectedGraph:
     
     def number_of_nodes(self):
         ''' This method should return the number of nodes in the graph'''
-        # TODO: Implement this method
-        pass
+        return self.number_of_nodes
+        
 
 
 # Problem 9(a)
