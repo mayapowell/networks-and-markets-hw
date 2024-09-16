@@ -50,12 +50,14 @@ class UndirectedGraph:
     def add_edge(self, nodeA, nodeB):
         ''' Adds an undirected edge to the graph, between nodeA and nodeB. Order of arguments should not matter'''
         for i in self.edges: 
-          if i[0]== nodeA or i[0] == nodeB
-            if i[1] == nodeA or i[1] == nodeB
+          if i[0]== nodeA or i[0] == nodeB:
+            if i[1] == nodeA or i[1] == nodeB:
                 pass
-                else self.edges.append([nodeA,nodeB])
-            else self.edges.append([nodeA,nodeB])
-      
+            else: 
+                self.edges.append([nodeA,nodeB])
+        else: 
+            self.edges.append([nodeA,nodeB])
+    
        
     
     def edges_from(self, nodeA):
