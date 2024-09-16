@@ -32,6 +32,7 @@ python_version = "3.12"
 # ====================================
 import numpy as np
 import matplotlib.pyplot as plt
+import random as rand
 
 
 # =====================================
@@ -42,37 +43,53 @@ import matplotlib.pyplot as plt
 # interface.
 # =====================================
 class UndirectedGraph:
-    def __init__(self,number_of_nodes):
+    def __init__(self,number_of_nodes:int):
         '''Assume that nodes are represented by indices/integers between 0 and number_of_nodes - 1.'''
         self.number_of_nodes = number_of_nodes
         self.edges = []
     
     def add_edge(self, nodeA, nodeB):
         ''' Adds an undirected edge to the graph, between nodeA and nodeB. Order of arguments should not matter'''
-        for i in self.edges: 
-          if i[0]== nodeA or i[0] == nodeB:
-            if i[1] == nodeA or i[1] == nodeB:
-                pass
-            else: 
-                self.edges.append([nodeA,nodeB])
-        else: 
+
+        if len(self.edges) == 0:
             self.edges.append([nodeA,nodeB])
+            
+            for i in self.edges: 
+                if i[0]== nodeA or i[0] == nodeB:
+                    if i[1] == nodeA or i[1] == nodeB:
+                        pass
+                    else: 
+                        self.edges.append([nodeA,nodeB])
+                else: 
+                    self.edges.append([nodeA,nodeB])
     
        
     
     def edges_from(self, nodeA):
         ''' This method shold return a list of all the nodes nodeB such that nodeA and nodeB are 
         connected by an edge'''
+
+        blist = []
+        for i in self.edges: 
+            if i[0]== nodeA:
+                blist.append(i[1])
+            elif i[1] == nodeA:
+                blist.append(i[0])
         
-        pass
+        return blist  
     
     def check_edge(self, nodeA, nodeB):
         ''' This method should return true is there is an edge between nodeA and nodeB, and false otherwise'''
 
-        
-        
-        # TODO: Implement this method
-        pass
+        for i in self.edges: 
+            if i[0]== nodeA or i[0] == nodeB:
+                if i[1] == nodeA or i[1] == nodeB:
+                    return True
+                else: 
+                    return False
+            else:
+                return False
+
     
     def number_of_nodes(self):
         ''' This method should return the number of nodes in the graph'''
@@ -81,17 +98,27 @@ class UndirectedGraph:
 
 
 # Problem 9(a)
-def create_graph(n,p):
+def create_graph(n:int,p):
     ''' Given number of nodes n and probability p, output an UndirectedGraph with n nodes, where each
     pair of nodes is connected by an edge with probability p'''
-    # TODO: Implement this method
-    pass
 
+    graph = UndirectedGraph(n)
+
+    for i in range(n):
+        for j in range(n):
+            threshold = rand.random()
+            if i!=j:
+                if threshold <= p:
+                    graph.add_edge(i, j)
+    
+    
 # Problem 9(b)
 def shortest_path(G,i,j):
     ''' Given an UndirectedGraph G and nodes i,j, output the length of the shortest path between i and j in G.
     If i and j are disconnected, output -1.'''
-    # TODO: Implement this method
+    
+    
+    
     pass
 
 # Problem 9(c)
