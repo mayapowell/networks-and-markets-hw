@@ -54,6 +54,7 @@ class UndirectedGraph:
         if len(self.edges) == 0:
             self.edges.append([nodeA,nodeB])
             
+        else:
             for i in self.edges: 
                 if i[0]== nodeA or i[0] == nodeB:
                     if i[1] == nodeA or i[1] == nodeB:
@@ -62,6 +63,7 @@ class UndirectedGraph:
                         self.edges.append([nodeA,nodeB])
                 else: 
                     self.edges.append([nodeA,nodeB])
+
     
        
     
@@ -80,15 +82,18 @@ class UndirectedGraph:
     
     def check_edge(self, nodeA, nodeB):
         ''' This method should return true is there is an edge between nodeA and nodeB, and false otherwise'''
+        if len(self.edges) == 0:
+            return False
+        else: 
 
-        for i in self.edges: 
-            if i[0]== nodeA or i[0] == nodeB:
-                if i[1] == nodeA or i[1] == nodeB:
-                    return True
-                else: 
+            for i in self.edges: 
+                if i[0]== nodeA or i[0] == nodeB:
+                    if i[1] == nodeA or i[1] == nodeB:
+                        return True
+                    else: 
+                        return False
+                else:
                     return False
-            else:
-                return False
 
     
     def number_of_nodes(self):
@@ -116,6 +121,11 @@ def create_graph(n:int,p):
 def shortest_path(G,i,j):
     ''' Given an UndirectedGraph G and nodes i,j, output the length of the shortest path between i and j in G.
     If i and j are disconnected, output -1.'''
+    if check_edge(i,j):
+        return 1
+    else:
+        for x in edges_from(G, i)
+        return 1+(shortest_path(G,edges_from(G, i)[x],j ))
     
     
     
