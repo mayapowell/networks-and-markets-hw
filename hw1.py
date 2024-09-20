@@ -137,14 +137,14 @@ def shortest_path(G,i,j):
             return counter
         # pop shallowest node (first node) from queue
         node = queue.pop(0)
-        if node not in explored:
-            # add node to list of checked nodes
-            explored.append(node)
-            neighbours = graph[node]
+         # add node to list of checked nodes
+        explored.append(node)
+        neighbours = edges_from(G,node)
  
-            # add neighbours of node to queue
-            for neighbour in neighbours:
-                queue.append(neighbour)
+        # add neighbours of node to queue
+        for neighbour in neighbours:
+            if node not in explored: 
+                 queue.append(neighbour)
     return -1
     
     
