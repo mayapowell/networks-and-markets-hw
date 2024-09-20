@@ -121,15 +121,35 @@ def create_graph(n:int,p):
 def shortest_path(G,i,j):
     ''' Given an UndirectedGraph G and nodes i,j, output the length of the shortest path between i and j in G.
     If i and j are disconnected, output -1.'''
-    if check_edge(i,j):
-        return 1
-    else:
-        for x in edges_from(G, i)
-        return 1+(shortest_path(G,edges_from(G, i)[x],j ))
+    # keep track of all visited nodes
+    explored = []
+    # keep track of nodes to be checked
+    queue = [i]
+    #keeps track of the length of the shortest path between i and j in G
+    counter = 0
+ 
+    # keep looping until there are nodes still to be checked
+    while queue:
+        #add 1 to counter 
+        counter= counter+1
+        #check if this node is connected to our target node 
+        if check_edge(G,i,j):
+            return counter
+        # pop shallowest node (first node) from queue
+        node = queue.pop(0)
+        if node not in explored:
+            # add node to list of checked nodes
+            explored.append(node)
+            neighbours = graph[node]
+ 
+            # add neighbours of node to queue
+            for neighbour in neighbours:
+                queue.append(neighbour)
+    return -1
     
     
     
-    pass
+    
 
 # Problem 9(c)
 def avg_shortest_path(G, num_samples=1000):
