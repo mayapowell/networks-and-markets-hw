@@ -34,6 +34,7 @@ import matplotlib.pyplot as plt
 import random as rand
 
 
+
 # =====================================
 # IMPORTANT: You are NOT allowed to modify the method signatures 
 # (i.e. the arguments and return types each function takes). 
@@ -50,21 +51,8 @@ class UndirectedGraph:
     def add_edge(self, nodeA, nodeB):
         ''' Adds an undirected edge to the graph, between nodeA and nodeB. Order of arguments should not matter'''
 
-        if len(self.edges) == 0:
+        if self.check_edge(nodeA, nodeB) == False:
             self.edges.append([nodeA,nodeB])
-            
-        else:
-            for i in self.edges: 
-                if i[0]== nodeA or i[0] == nodeB:
-                    if i[1] == nodeA or i[1] == nodeB:
-                        pass
-                    else: 
-                        self.edges.append([nodeA,nodeB])
-                else: 
-                    self.edges.append([nodeA,nodeB])
-
-    
-       
     
     def edges_from(self, nodeA):
         ''' This method shold return a list of all the nodes nodeB such that nodeA and nodeB are 
@@ -80,22 +68,21 @@ class UndirectedGraph:
         return blist  
     
     def check_edge(self, nodeA, nodeB):
-        ''' This method should return true is there is an edge between nodeA and nodeB, and false otherwise'''
-        if len(self.edges) == 0:
+        ''' This method should return true if there is an edge between nodeA and nodeB, and false otherwise'''
+        if self.edges == []:
             return False
         
         else: 
 
             for i in self.edges: 
-                if i[0]== nodeA or i[0] == nodeB:
-                    if i[1] == nodeA or i[1] == nodeB:
-                        return True
-                    else: 
-                        return False
-                else:
-                    return False
+                if int(i[0]) == nodeA and int(i[1]) == nodeB:
+                    return True
+            
+                elif int(i[1]) == nodeA and int(i[0]) == nodeB:
+                    return True
+            
+            return False
 
-    
     def number_of_nodes(self):
         ''' This method should return the number of nodes in the graph'''
         return self._number_of_nodes
@@ -110,11 +97,10 @@ def create_graph(n,p):
     graph = UndirectedGraph(n)
 
     for i in range(n):
-        for j in range(n):
+        for j in range(i + 1, n):
             threshold = rand.random()
-            if i!=j:
-                if threshold <= p:
-                    graph.add_edge(i, j)
+            if i!=j and threshold <= p:
+                graph.add_edge(i, j)
 
     return graph
     
@@ -206,13 +192,14 @@ def create_fb_graph(filename = "facebook_combined.txt"):
     ''' This method should return a undirected version of the facebook graph as an instance of the UndirectedGraph class.
     You may assume that the input graph has 4039 nodes.''' 
 
-
-
-
-    # TODO: Implement this method 
-    # for line in open(filename):
-    #     pass
-    pass
+    graph = UndirectedGraph(4039)  # Create a graph with 4039 nodes
+    
+    with open(filename, 'r') as file:
+        for line in file:
+            nodeA, nodeB = map(int, line.split())  # Split the line into two integers
+            graph.add_edge(nodeA, nodeB)  # Add the edge to the graph
+    
+    return graph
 
 # Please include any additional code you use for analysis, or to generate graphs, here. This will be manually graded.
 # Problem 9(c) if applicable.
