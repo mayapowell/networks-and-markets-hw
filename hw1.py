@@ -110,7 +110,7 @@ def shortest_path(G,i,j):
     ''' Given an UndirectedGraph G and nodes i,j, output the length of the shortest path between i and j in G.
     If i and j are disconnected, output -1.'''
     if i == j:
-        return 0
+        return -1 #comparing same node, return -1
     
     visited = [False] * G.number_of_nodes()  # Keep track of visited nodes
     queue = [(i, 0)]  # List to hold (node, current_distance)
