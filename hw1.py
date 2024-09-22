@@ -123,6 +123,28 @@ def create_graph(n,p):
 def shortest_path(G,i,j):
     ''' Given an UndirectedGraph G and nodes i,j, output the length of the shortest path between i and j in G.
     If i and j are disconnected, output -1.'''
+    if i == j:
+        return 0
+    
+    visited = [False] * G.number_of_nodes()  # Keep track of visited nodes
+    queue = [(i, 0)]  # List to hold (node, current_distance)
+    visited[i] = True  #Visited starting node
+    
+    while queue:
+        current_node, distance = queue.pop(0)
+        
+        # Check all neighbors of the current node
+        for neighbor in G.edges_from(current_node):
+            if not visited[neighbor]:
+                if neighbor == j:
+                    return distance + 1  # Return the shortest path when we find node j
+                visited[neighbor] = True
+                queue.append((neighbor, distance + 1))  # Append to the end with updated distance
+    
+    return -1  # Return -1 if no path is found   
+   
+   
+    """
     # keep track of all visited nodes
     explored = []
     # keep track of nodes to be checked
@@ -153,7 +175,7 @@ def shortest_path(G,i,j):
                  queue.append(neighbour)
 
     return -1
-    
+    """
 
 # Problem 9(c)
 def avg_shortest_path(G, num_samples=1000):
@@ -182,7 +204,11 @@ def avg_shortest_path(G, num_samples=1000):
 # Problem 10(a)
 def create_fb_graph(filename = "facebook_combined.txt"):
     ''' This method should return a undirected version of the facebook graph as an instance of the UndirectedGraph class.
-    You may assume that the input graph has 4039 nodes.'''    
+    You may assume that the input graph has 4039 nodes.''' 
+
+
+    
+       
     # TODO: Implement this method 
     # for line in open(filename):
     #     pass
