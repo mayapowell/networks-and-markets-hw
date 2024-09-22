@@ -18,7 +18,6 @@ authors = ['drs374', 'mlp267']
 # ====================================
 python_version = "3.12"
 
-
 # ======Submission and Packages=======
 # Make sure to submit hw1.py to Gradescope, and make
 # sure to keep the name the same. If your code spans
@@ -43,7 +42,7 @@ import random as rand
 # interface.
 # =====================================
 class UndirectedGraph:
-    def __init__(self,number_of_nodes:int):
+    def __init__(self,number_of_nodes):
         '''Assume that nodes are represented by indices/integers between 0 and number_of_nodes - 1.'''
         self.number_of_nodes = number_of_nodes
         self.edges = []
@@ -84,6 +83,7 @@ class UndirectedGraph:
         ''' This method should return true is there is an edge between nodeA and nodeB, and false otherwise'''
         if len(self.edges) == 0:
             return False
+        
         else: 
 
             for i in self.edges: 
@@ -103,7 +103,7 @@ class UndirectedGraph:
 
 
 # Problem 9(a)
-def create_graph(n:int,p):
+def create_graph(n,p):
     ''' Given number of nodes n and probability p, output an UndirectedGraph with n nodes, where each
     pair of nodes is connected by an edge with probability p'''
 
@@ -115,6 +115,8 @@ def create_graph(n:int,p):
             if i!=j:
                 if threshold <= p:
                     graph.add_edge(i, j)
+
+    return graph
     
     
 # Problem 9(b)
@@ -127,28 +129,30 @@ def shortest_path(G,i,j):
     queue = [i]
     #keeps track of the length of the shortest path between i and j in G
     counter = 0
+
+    if i==j:
+        return 0
+
  
     # keep looping until there are nodes still to be checked
     while queue:
         #add 1 to counter 
-        counter= counter+1
+        counter += counter
         #check if this node is connected to our target node 
-        if check_edge(G,i,j):
+        if UndirectedGraph.check_edge(G,i,j):
             return counter
         # pop shallowest node (first node) from queue
         node = queue.pop(0)
          # add node to list of checked nodes
         explored.append(node)
-        neighbours = edges_from(G,node)
+        neighbours = UndirectedGraph.edges_from(G,node)
  
         # add neighbours of node to queue
         for neighbour in neighbours:
             if node not in explored: 
                  queue.append(neighbour)
+
     return -1
-    
-    
-    
     
 
 # Problem 9(c)
@@ -156,8 +160,24 @@ def avg_shortest_path(G, num_samples=1000):
     ''' Given an UndirectedGraph G, return an estimate of the average shortest path in G, where the average is taken
     over all pairs of CONNECTED nodes. The estimate should be taken by sampling num_samples random pairs of connected nodes, 
     and computing the average of their shortest paths. Return a decimal number.'''
-    # TODO: Implement this method
-    pass
+        
+    total_distance = 0
+    count = 0
+    
+    for dummy in range(num_samples):
+
+        i = rand.randint(0, G.number_of_nodes() - 1) #random int from 0 to (G.count - 1)
+        j = rand.randint(0, G.number_of_nodes() - 1) 
+
+        distance = shortest_path(G, i, j)
+        
+        if distance != -1:
+            total_distance += distance
+            count += 1
+    
+    if count == 0:
+        return -1  # No connected pairs
+    return total_distance / count #decimal value of average shortest path
 
 # Problem 10(a)
 def create_fb_graph(filename = "facebook_combined.txt"):
