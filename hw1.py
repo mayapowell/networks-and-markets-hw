@@ -44,7 +44,7 @@ import random as rand
 class UndirectedGraph:
     def __init__(self,number_of_nodes):
         '''Assume that nodes are represented by indices/integers between 0 and number_of_nodes - 1.'''
-        self.number_of_nodes = number_of_nodes
+        self._number_of_nodes = number_of_nodes
         self.edges = []
     
     def add_edge(self, nodeA, nodeB):
@@ -98,7 +98,7 @@ class UndirectedGraph:
     
     def number_of_nodes(self):
         ''' This method should return the number of nodes in the graph'''
-        return self.number_of_nodes
+        return self._number_of_nodes
         
 
 
@@ -207,8 +207,8 @@ def create_fb_graph(filename = "facebook_combined.txt"):
     You may assume that the input graph has 4039 nodes.''' 
 
 
-    
-       
+
+
     # TODO: Implement this method 
     # for line in open(filename):
     #     pass
