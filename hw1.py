@@ -202,14 +202,72 @@ def create_fb_graph(filename = "facebook_combined.txt"):
     return graph
 
 # Please include any additional code you use for analysis, or to generate graphs, here. This will be manually graded.
-# Problem 9(c) if applicable.
-# Problem 9(d)
-# Problem 10(b)
-# Problem 10(c) if applicable.
-# Problem 10(d) if applicable.
-def main():
-    # TODO: Implement this method
-    print("hello world")
 
-if __name__ == "__main__":
-    main()
+
+# Problem 9(c)
+"""
+graph9c = create_graph(1000,0.1)
+print(avg_shortest_path(graph9c, num_samples=1000))
+"""
+
+# Problem 9(d)
+"""
+
+graph9d1 = create_graph(1000,0.01)
+graph9d2 = create_graph(1000,0.02)
+graph9d3 = create_graph(1000,0.03)
+graph9d4 = create_graph(1000,0.04)
+graph9d5 = create_graph(1000,0.05)
+graph9d6 = create_graph(1000,0.1)
+graph9d7 = create_graph(1000,0.15)
+graph9d8 = create_graph(1000,0.2)
+graph9d9 = create_graph(1000,0.25)
+graph9d10 = create_graph(1000,0.3)
+graph9d11 = create_graph(1000,0.35)
+graph9d12 = create_graph(1000,0.4)
+graph9d13 = create_graph(1000,0.45)
+graph9d14 = create_graph(1000,0.5)
+
+av1 = (avg_shortest_path(graph9d1, num_samples=1000))
+av2 = (avg_shortest_path(graph9d2, num_samples=1000))
+av3 = (avg_shortest_path(graph9d3, num_samples=1000))
+av4 = (avg_shortest_path(graph9d4, num_samples=1000))
+av5 = (avg_shortest_path(graph9d5, num_samples=1000))
+av6 = (avg_shortest_path(graph9d6, num_samples=1000))
+av7 = (avg_shortest_path(graph9d7, num_samples=1000))
+av8 = (avg_shortest_path(graph9d8, num_samples=1000))
+av9 = (avg_shortest_path(graph9d9, num_samples=1000))
+av10 = (avg_shortest_path(graph9d10, num_samples=1000))
+av11 = (avg_shortest_path(graph9d11, num_samples=1000))
+av12 = (avg_shortest_path(graph9d12, num_samples=1000))
+av13 = (avg_shortest_path(graph9d13, num_samples=1000))
+av14 = (avg_shortest_path(graph9d14, num_samples=1000))
+
+plist = [0.01, 0.02, 0.03, 0.04, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5]
+averagedist = [av1, av2, av3, av4, av5, av6, av7, av8, av9, av10, av11, av12, av13, av14]
+
+
+plt.xlabel("Probability")
+plt.ylabel("Average Distance Betwwen Nodes")
+plt.plot(plist, averagedist)
+plt.draw()
+plt.show()
+
+"""
+
+
+
+# Problem 10(b)
+"""
+FbGraph = create_fb_graph("facebook_combined.txt")
+print(avg_shortest_path(FbGraph, num_samples=1000))
+"""
+
+
+
+
+
+# Problem 10(d)
+
+graph10d = create_graph(4039,0.01081)
+print(avg_shortest_path(graph10d, num_samples=1000))
