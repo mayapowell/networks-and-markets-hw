@@ -46,42 +46,24 @@ class UndirectedGraph:
     def __init__(self,number_of_nodes):
         '''Assume that nodes are represented by indices/integers between 0 and number_of_nodes - 1.'''
         self._number_of_nodes = number_of_nodes
-        self.edges = []
+        self.adj_list = {i: set() for i in range(number_of_nodes)}  # Dictionary to store adjacency lists
     
     def add_edge(self, nodeA, nodeB):
         ''' Adds an undirected edge to the graph, between nodeA and nodeB. Order of arguments should not matter'''
 
-        if self.check_edge(nodeA, nodeB) == False:
-            self.edges.append([nodeA,nodeB])
+        if nodeA != nodeB:  # Ignore self-loops
+            self.adj_list[nodeA].add(nodeB) #Add edge to both node dictionaries
+            self.adj_list[nodeB].add(nodeA)
     
     def edges_from(self, nodeA):
         ''' This method shold return a list of all the nodes nodeB such that nodeA and nodeB are 
         connected by an edge'''
 
-        blist = []
-        for i in self.edges: 
-            if i[0]== nodeA:
-                blist.append(i[1])
-            elif i[1] == nodeA:
-                blist.append(i[0])
-        
-        return blist  
+        return list(self.adj_list[nodeA]) #Returns all nodes that are in nodeA dictionary
     
     def check_edge(self, nodeA, nodeB):
         ''' This method should return true if there is an edge between nodeA and nodeB, and false otherwise'''
-        if self.edges == []:
-            return False
-        
-        else: 
-
-            for i in self.edges: 
-                if int(i[0]) == nodeA and int(i[1]) == nodeB:
-                    return True
-            
-                elif int(i[1]) == nodeA and int(i[0]) == nodeB:
-                    return True
-            
-            return False
+        return nodeB in self.adj_list[nodeA] #Returns T/F
 
     def number_of_nodes(self):
         ''' This method should return the number of nodes in the graph'''
@@ -103,7 +85,6 @@ def create_graph(n,p):
                 graph.add_edge(i, j)
 
     return graph
-    
     
 # Problem 9(b)
 def shortest_path(G,i,j):
@@ -129,39 +110,6 @@ def shortest_path(G,i,j):
     
     return -1  # Return -1 if no path is found   
    
-   
-    """
-    # keep track of all visited nodes
-    explored = []
-    # keep track of nodes to be checked
-    queue = [i]
-    #keeps track of the length of the shortest path between i and j in G
-    counter = 0
-
-    if i==j:
-        return 0
-
- 
-    # keep looping until there are nodes still to be checked
-    while queue:
-        #add 1 to counter 
-        counter += counter
-        #check if this node is connected to our target node 
-        if UndirectedGraph.check_edge(G,i,j):
-            return counter
-        # pop shallowest node (first node) from queue
-        node = queue.pop(0)
-         # add node to list of checked nodes
-        explored.append(node)
-        neighbours = UndirectedGraph.edges_from(G,node)
- 
-        # add neighbours of node to queue
-        for neighbour in neighbours:
-            if node not in explored: 
-                 queue.append(neighbour)
-
-    return -1
-    """
 
 # Problem 9(c)
 def avg_shortest_path(G, num_samples=1000):
@@ -197,7 +145,7 @@ def create_fb_graph(filename = "facebook_combined.txt"):
     with open(filename, 'r') as file:
         for line in file:
             nodeA, nodeB = map(int, line.split())  # Split the line into two integers
-            graph.add_edge(nodeA, nodeB)  # Add the edge to the graph
+            graph.add_edge(nodeA, nodeB)  # Add the edge to the graph between nodes
     
     return graph
 
@@ -211,8 +159,8 @@ print(avg_shortest_path(graph9c, num_samples=1000))
 """
 
 # Problem 9(d)
-"""
 
+"""
 graph9d1 = create_graph(1000,0.01)
 graph9d2 = create_graph(1000,0.02)
 graph9d3 = create_graph(1000,0.03)
@@ -256,14 +204,11 @@ plt.show()
 """
 
 
-
 # Problem 10(b)
 """
 FbGraph = create_fb_graph("facebook_combined.txt")
 print(avg_shortest_path(FbGraph, num_samples=1000))
 """
-
-
 
 
 
