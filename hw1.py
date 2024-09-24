@@ -50,10 +50,8 @@ class UndirectedGraph:
     
     def add_edge(self, nodeA, nodeB):
         ''' Adds an undirected edge to the graph, between nodeA and nodeB. Order of arguments should not matter'''
-
-        if nodeA != nodeB:  # Ignore self-loops
-            self.adj_list[nodeA].add(nodeB) #Add edge to both node dictionaries
-            self.adj_list[nodeB].add(nodeA)
+        self.adj_list[nodeA].add(nodeB) #Add edge to both node dictionaries
+        self.adj_list[nodeB].add(nodeA)
     
     def edges_from(self, nodeA):
         ''' This method shold return a list of all the nodes nodeB such that nodeA and nodeB are 
@@ -91,7 +89,7 @@ def shortest_path(G,i,j):
     ''' Given an UndirectedGraph G and nodes i,j, output the length of the shortest path between i and j in G.
     If i and j are disconnected, output -1.'''
     if i == j:
-        return -1 #comparing same node, return -1
+        return 0 #comparing same node, return 0
     
     visited = [False] * G.number_of_nodes()  # Keep track of visited nodes
     queue = [(i, 0)]  # List to hold (node, current_distance)
@@ -127,7 +125,7 @@ def avg_shortest_path(G, num_samples=1000):
 
         distance = shortest_path(G, i, j)
         
-        if distance != -1:
+        if distance != -1 and distance != 0:
             total_distance += distance
             count += 1
     
